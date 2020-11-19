@@ -1,0 +1,25 @@
+{
+  "name": "rosary-manager",
+  "version": "1.0.0",
+  "description": "Manager róży różańcowej.",
+  "main": "rosary-manager.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomskr/HTML-Rosary.git"
+  },
+  "author": "Tomasz Skrzypek",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomskr/HTML-Rosary/issues"
+  },
+  "homepage": "https://github.com/tomskr/HTML-Rosary#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "pstree.remy": "^1.1.0"
+  }
+}
