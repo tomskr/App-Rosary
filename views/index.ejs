@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <ul>
+      <% for(let x = 0; x<gropList.length; x++){ %>
+        <li><%= gropList[x] %></li>
+      <%}%>
+    </ul>
+    <form action="/" method="post">
+      <input type="text" name="groupName">
+      <button type="submit" name="button">Add</button>
+    </form>
+  </body>
+</html>
