@@ -39,26 +39,33 @@ const group3 = new RosaryGroup({
 
 const defaultRosaryGroups = [group1, group2, group3]
 
-RosaryGroup.insertMany(defaultRosaryGroups, function(err){
-  if(err){
-    console.log(err)
-  }else{
-    console.log("Success")
-  }
-})
+
 
 
 
 app.get('/', function (req, res) {
   RosaryGroup.find({}, function(err, foundRG){
+    if(foundRG.length === 0){
+      RosaryGroup.insertMany(defaultRosaryGroups, function(err){
+        if(err){
+          console.log(err)
+        }else{
+          console.log("Success")
+        }
+      })
+      res.redirect("/")
+    }
     console.log(foundRG)
     res.render("index",{gropList: foundRG})
   })
 })
 
 app.post('/', function(req,res){
-  let item = req.body.groupName
-  rosaryGroups.push(item);
+  const groupName = req.body.groupName
+  const group = new RosaryGroup({
+    name: groupName
+  })
+  group.save()
   res.redirect('/')
 })
 
