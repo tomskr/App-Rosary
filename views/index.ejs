@@ -8,9 +8,9 @@
   <body>
     <h1>Hello World</h1>
     <ul>
-      <% for(let x = 0; x<gropList.length; x++){ %>
-        <li><%= gropList[x] %></li>
-      <%}%>
+      <%gropList.forEach(function(rosaryGroup){%>
+        <li><%= rosaryGroup.name %></li>
+      <%})%>
     </ul>
     <form action="/" method="post">
       <input type="text" name="groupName">
