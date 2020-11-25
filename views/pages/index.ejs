@@ -1,0 +1,36 @@
+<%- include('../partial/header'); -%>
+<%- include('../partial/navbar'); -%>
+<div class="container">
+  <div class="row">
+
+    <table class="table table-hover">
+      <thead>
+        <tr scope="row">
+          <th scope="col-1">#</th>
+          <th scope="col-11">
+            <h1>Grupy Różańca</h1>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <%gropList.forEach(function(rosaryGroup){%>
+        <tr scope="row">
+          <td>nr</td>
+          <td><%= rosaryGroup.name %></td>
+        </tr>
+        <%})%>
+        <tr scope="row">
+          <td>nr</td>
+          <td>
+            <form action="/" method="post">
+              <input type="text" name="groupName">
+              <button type="submit" name="button">Add</button>
+            </form>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('../partial/footer'); -%>

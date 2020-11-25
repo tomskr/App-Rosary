@@ -15,48 +15,29 @@ app.use(express.static("public"))
 
 mongoose.connect("mongodb://localhost:27017/rosaryDB",{ useNewUrlParser: true },{ useUnifiedTopology: true })
 
-const rosaryGroupSchema = {
+const rosary
+
+const rosaryMember = {
+  name: String
+}
+
+const rosaryGroupShema = {
   index: Number,
   name: String,
+  rosaryMembers: [rosaryMember]
 };
 
-const RosaryGroup = mongoose.model("RosaryGroup",rosaryGroupSchema)
-
-const group1 = new RosaryGroup({
-  index: 1,
-  name: "Teresa"
-})
-
-const group2 = new RosaryGroup({
-  index: 2,
-  name: "Antoni"
-})
-
-const group3 = new RosaryGroup({
-  index: 3,
-  name: "Maria"
-})
-
-const defaultRosaryGroups = [group1, group2, group3]
 
 
+const RosaryGroup = mongoose.model("RosaryGroup",rosaryGroupShema)
 
 
+// index
 
 app.get('/', function (req, res) {
   RosaryGroup.find({}, function(err, foundRG){
-    if(foundRG.length === 0){
-      RosaryGroup.insertMany(defaultRosaryGroups, function(err){
-        if(err){
-          console.log(err)
-        }else{
-          console.log("Success")
-        }
-      })
-      res.redirect("/")
-    }
     console.log(foundRG)
-    res.render("index",{gropList: foundRG})
+    res.render('pages/index',{gropList: foundRG})
   })
 })
 
@@ -69,7 +50,15 @@ app.post('/', function(req,res){
   res.redirect('/')
 })
 
+//czlonkowie
+app.get('{}/czlonkowie',function(req,res){
+  res.render('pages/harmonogram')
+})
+//Harmonogram
 
+app.get('/harmonogram',function(req,res){
+  res.render('pages/harmonogram')
+})
 
 app.listen(3000, function(){
   console.log('Server connected to port ' + port)
