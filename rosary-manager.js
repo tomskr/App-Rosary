@@ -40,11 +40,16 @@ app.get('/', function (req, res) {
 })
 
 app.post('/', async (req,res) =>{
+  rosaryGroup.find({},(err,foundRG)=>{
+  const nr = foundRG.length +1
+  const name = req.body.name
   const newGroup = new rosaryGroup({
-    name: req.body.name,
-    order: rosaryGroup.length +1
+    name: name,
+    order: nr
   })
+  console.log(newGroup)
   newGroup.save()
+})
   res.redirect('/')
 })
 
