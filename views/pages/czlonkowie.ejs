@@ -3,4 +3,10 @@
 
 <h1>Członkowie</h1>
 
+<form action="/czlonkowie/<%= group.id %>" method="post">
+    <input type="text" name="firstName">
+    <input type="text" name="lastName">
+    <input type="submit">
+</form>
+
 <%- include('../partial/footer'); -%>

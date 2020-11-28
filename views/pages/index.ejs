@@ -6,7 +6,7 @@
     <table class="table table-hover">
       <thead>
         <tr scope="row">
-          <th scope="col-1">#</th>
+          <th scope="col-1"></th>
           <th scope="col-11">
             <h1>Grupy Różańca</h1>
           </th>
@@ -14,13 +14,14 @@
       </thead>
       <tbody>
         <%gropList.forEach(function(rosaryGroup){%>
-        <tr scope="row">
-          <td>nr</td>
-          <td><%= rosaryGroup.name %></td>
-        </tr>
+          
+            <tr scope="row">
+              <td><%= rosaryGroup.order %></td>
+              <td><a href="/czlonkowie/<%= rosaryGroup.id %>"><%= rosaryGroup.name %></a></td>
+            </tr>
         <%})%>
         <tr scope="row">
-          <td>nr</td>
+          <a href=""><td>nr</td></a>
           <td>
             <form action="/" method="post">
               <input type="text" name="groupName">

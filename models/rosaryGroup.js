@@ -4,13 +4,13 @@ const {Schema} = mongoose
 const rosaryGroupSchema = Schema({
      order:{
         type: Number,
-        unique: true
+        // unique: true
      },
      name: String,
-     members:{
+     rosaryMembers:[{
         type: Schema.Types.ObjectId,
         ref:'rosaryMember'
-     }
+     }]
 })
 
 const rosaryGroup = mongoose.model('rosaryGroup',rosaryGroupSchema)

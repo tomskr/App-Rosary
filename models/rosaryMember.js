@@ -2,9 +2,8 @@ const  mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const rosaryMemberSchema = new Schema({
-    index: Number,
-    name: String,
-    rosaryMembers: []
+    firstName : String,
+    lastName : String
 })
 
 const rosaryMember = mongoose.model('rosaryMember',rosaryMemberSchema)

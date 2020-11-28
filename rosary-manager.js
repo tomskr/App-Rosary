@@ -35,25 +35,35 @@ mongoose.connect("mongodb://localhost:27017/rosaryDB",{
 
 app.get('/', function (req, res) {
   rosaryGroup.find({}, function(err, foundRG){
-    console.log(foundRG)
     res.render('./pages/index',{gropList: foundRG})
   })
 })
 
-app.post('/', function(req,res){
-  const groupName = req.body.groupName
-  const group = new rosaryGroup({
-    name: groupName
+app.post('/', async (req,res) =>{
+  const newGroup = new rosaryGroup({
+    name: req.body.name,
+    order: rosaryGroup.length +1
   })
-  group.save()
+  newGroup.save()
   res.redirect('/')
 })
 
 //czlonkowie
-app.get('{}/czlonkowie',function(req,res){
-  res.render('pages/harmonogram')
+app.get('/czlonkowie/:id',async(req,res) =>{
+  const {id} = req.params
+  const group = await rosaryGroup.findById(id)
+  res.render('./pages/czlonkowie',{group})
 })
-//Harmonogram
+
+app.post('/czlonkowie/:id',async(req,res) =>{
+  const {id} = req.params
+  const group = await rosaryGroup.findById(id)
+  const newRosaryMember = new rosaryMember(req.body)
+  group.rosaryMembers.push(newRosaryMember)
+  group.save()
+  res.redirect('/czlonkowie/' + id)
+})
+//Harmonograms
 
 app.get('/harmonogram',function(req,res){
   res.render('pages/harmonogram')
