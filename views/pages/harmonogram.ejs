@@ -1,7 +1,20 @@
 <%- include('../partial/header'); -%>
 <%- include('../partial/navbar'); -%>
 
-<h1>Wspólnota Żywego Różańca Św. Kalendarz na rok 2021</h1>
 
+<div class="container">
+    <h2>Wspólnota Żywego Różańca Św. Kalendarz na rok 2021</h2>         
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Nr Róży. wezwanie zelator</td>
+          <% heders.forEach(function(heder){ %>
+            <td><%=heder%></td>
+          <% }); %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
 
 <%- include('../partial/footer'); -%>

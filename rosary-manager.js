@@ -1,10 +1,12 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require("mongoose")
+const firstSundays =require('./event.js')
 
 const rosaryGroup = require('./models/rosaryGroup')
 const rosaryMember = require('./models/rosaryMember')
-const rosaryEvent = require('./models/rosaryEvent')
+const rosaryEvent = require('./models/rosaryEvent');
+const event = require('./event.js');
 
 
 const app = express()
@@ -71,7 +73,9 @@ app.post('/czlonkowie/:id',async(req,res) =>{
 //Harmonograms
 
 app.get('/harmonogram',function(req,res){
-  res.render('pages/harmonogram')
+  const heders = event.firstSundays()
+
+  res.render('pages/harmonogram',{heders})
 })
 
 app.listen(3000, function(){
