@@ -52,7 +52,8 @@ app.post('/', async (req,res) =>{
   res.redirect('/')
 })
 
-app.delete('/:id', async (req, res) => {
+app.post('/:id/delete', async (req, res) => {
+  console.log(req.params.id)
   const groupList = await rosaryGroup.findByIdAndDelete(req.params.id)
   res.redirect('/')
 })

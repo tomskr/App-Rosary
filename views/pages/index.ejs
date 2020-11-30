@@ -19,7 +19,7 @@
               <td><%= rosaryGroup.order %></td>
               <td><a href="/czlonkowie/<%= rosaryGroup.id %>"><%= rosaryGroup.name %></a></td>
               <td>
-                <form action="/<%=rosaryGroup.id%>?_method=DELETE" method="POST">
+                <form action="/<%=rosaryGroup.id%>/delete" method="POST">
                   <button>Usuń</button></form>
               </td>
             </tr>
