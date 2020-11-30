@@ -36,8 +36,8 @@ mongoose.connect("mongodb://localhost:27017/rosaryDB",{
 // index
 
 app.get('/', async (req, res) => {
-   const groupList = await rosaryGroup.find({})
-    res.render('./pages/index',{groupList})
+   const groupList = await rosaryGroup.find({}).sort({"order":1})
+    res.render('./pages/grupy/grupy.ejs',{groupList})
 })
 
 app.post('/', async (req,res) =>{
