@@ -4,7 +4,8 @@
   "description": "Manager róży różańcowej.",
   "main": "rosary-manager.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "rosary-manager.js"
   },
   "repository": {
     "type": "git",
