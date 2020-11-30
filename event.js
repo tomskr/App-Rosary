@@ -1,5 +1,6 @@
 const moment = require('moment');
 const rosaryEvent = require('./models/rosaryEvent');
+const rosaryGroup = require('./models/rosaryGroup')
 moment().format(); 
 
     months = ['STY','LUT','MAR','KWI','MAJ','CZE','LIP','SIE','WRZ','PAZ','LIS','GRU']
@@ -16,8 +17,17 @@ moment().format();
     }
 
         const populateEvents = () => {
+            //find first monday
+            var date = moment("2021-01-01")
+            while(date.day()!=1){
+                date.add(1,'d')
+            }
+            //create array of fosary group id
+            //  const foundID = rosaryGroup.find({id:1});
+            //      console.log(foundID)
             
         }
 
 
 exports.firstSundays = firstSundays
+exports.populateEvents = populateEvents

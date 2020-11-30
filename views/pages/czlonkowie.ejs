@@ -2,10 +2,33 @@
 <%- include('../partial/navbar'); -%>
 
 <h1>Członkowie</h1>
+<table class="table table-hover">
+    <thead>
+      <tr scope="row">
+        <th scope="col-1"></th>
+        <th scope="col-11">
+          <h1>Grupy Różańca</h1>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
 
-<form action="/czlonkowie/<%= group.id %>" method="post">
+      <tr scope="row">
+        </tr>
+    </tbody>
+    </table>
+<form action="/czlonkowie/" method="post">
     <input type="text" name="firstName">
     <input type="text" name="lastName">
+    <input type="text" name="phone">
+    <input type="text" name="cellPhone">
+    <input type="text" name="postKode">
+    <input type="text" name="adress">
+    <input type="text" name="yearJoining">
+    <input type="text" name="nameDay">
+    <input type="text" name="birthDay">
+    <input type="text" name="position">
+    <input type="text" name="status">
     <input type="submit">
 </form>
 

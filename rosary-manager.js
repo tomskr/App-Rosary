@@ -35,30 +35,33 @@ mongoose.connect("mongodb://localhost:27017/rosaryDB",{
 
 // index
 
-app.get('/', function (req, res) {
-  rosaryGroup.find({}, function(err, foundRG){
-    res.render('./pages/index',{gropList: foundRG})
-  })
+app.get('/', async (req, res) => {
+   const groupList = await rosaryGroup.find({})
+    res.render('./pages/index',{groupList})
 })
 
 app.post('/', async (req,res) =>{
-  rosaryGroup.find({},(err,foundRG)=>{
-  const nr = foundRG.length +1
-  const name = req.body.name
+  const groupList = await rosaryGroup.find({})
   const newGroup = new rosaryGroup({
-    name: name,
-    order: nr
+    name: req.body.name,
+    order: groupList.length + 1,
+    active: req.body.active
   })
-  console.log(newGroup)
   newGroup.save()
+  console.log(newGroup)
+  res.redirect('/')
 })
+
+app.delete('/:id', async (req, res) => {
+  const groupList = await rosaryGroup.findByIdAndDelete(req.params.id)
   res.redirect('/')
 })
 
 //czlonkowie
 app.get('/czlonkowie/:id',async(req,res) =>{
   const {id} = req.params
-  const group = await rosaryGroup.findById(id)
+  const group = await rosaryGroup.findById(id).populate('rosaryMembers')
+  console.log(group)
   res.render('./pages/czlonkowie',{group})
 })
 
@@ -76,6 +79,11 @@ app.get('/harmonogram',function(req,res){
   const heders = event.firstSundays()
 
   res.render('pages/harmonogram',{heders})
+})
+
+app.post('/harmonogram',async(req,res) =>{
+  event.populateEvents()
+  res.redirect('harmonogram')
 })
 
 app.listen(3000, function(){

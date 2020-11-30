@@ -13,21 +13,33 @@
         </tr>
       </thead>
       <tbody>
-        <%gropList.forEach(function(rosaryGroup){%>
+        <%groupList.forEach(function(rosaryGroup){%>
           
             <tr scope="row">
               <td><%= rosaryGroup.order %></td>
               <td><a href="/czlonkowie/<%= rosaryGroup.id %>"><%= rosaryGroup.name %></a></td>
+              <td>
+                <form action="/<%=rosaryGroup.id%>?_method=DELETE" method="POST">
+                  <button>Usuń</button></form>
+              </td>
             </tr>
         <%})%>
         <tr scope="row">
-          <a href=""><td>nr</td></a>
-          <td>
+
             <form action="/" method="post">
-              <input type="text" name="name">
+              <td>nr</td>
+              <td>
+                <input type="text" name="name">
+              </td>
+              <td>
+                <input type="radio" id="aktive" name="active" value='1'>
+                <label for="aktive">Aktywne</label><br>
+                <input type="radio" id="inaktive" name="active" value='0'>
+                <label for="inaktive">Nieaktywne</label>
+              </td> 
               <button type="submit" name="button">Add</button>
             </form>
-          </td>
+
         </tr>
       </tbody>
     </table>
