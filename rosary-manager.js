@@ -33,14 +33,20 @@ mongoose.connect("mongodb://localhost:27017/rosaryDB",{
 
 
 
-// index
+//main
 
-app.get('/', async (req, res) => {
-   const groupList = await rosaryGroup.find({}).sort({"order":1})
+//grup/
+app.get(['/group','/'], async (req, res) => {
+    const groupList = await rosaryGroup.find({}).sort({"order":1})
     res.render('./pages/grupy/grupy.ejs',{groupList})
 })
 
-app.post('/', async (req,res) =>{
+//group/new
+//group/:id/edit
+//group/:id/up
+//group/:id/down
+//group/:id/delete
+app.post('/group', async (req,res) =>{
   const groupList = await rosaryGroup.find({})
   const newGroup = new rosaryGroup({
     name: req.body.name,

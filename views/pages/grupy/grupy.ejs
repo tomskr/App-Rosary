@@ -2,44 +2,49 @@
 <%- include('../../partial/navbar'); -%>
 <div class="container">
   <div class="row">
-
-    <table class="table table-hover">
-      <thead>
+    <table class="table table-hover group-table">
+      <thead> 
         <tr scope="row">
-          <th scope="col-1"></th>
-          <th scope="col-11">
-            <h1>Grupy Różańca</h1>
-          </th>
+          <th></th>
+          <th><h1>Grupy Różańca</h1></th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <%groupList.forEach(function(rosaryGroup){%>
-          
-            <tr scope="row">
-              <td><%= rosaryGroup.order %></td>
-              <td><a href="/czlonkowie/<%= rosaryGroup.id %>"><%= rosaryGroup.name %></a></td>
-              <td>
-                <form action="/<%=rosaryGroup.id%>/delete" method="POST">
-                  <button>Usuń</button></form>
-              </td>
-            </tr>
-        <%})%>
         <tr scope="row">
-
-            <form action="/" method="post">
-              <td>nr</td>
-              <td>
-                <input type="text" name="name">
-              </td>
-              <td>
-                <input type="radio" id="aktive" name="active" value='1'>
-                <label for="aktive">Aktywne</label><br>
-                <input type="radio" id="inaktive" name="active" value='0'>
-                <label for="inaktive">Nieaktywne</label>
-              </td> 
-              <button type="submit" name="button">Add</button>
-            </form>
-
+          <td>.<%= rosaryGroup.order %></td>
+          <td><dvi href="/czlonkowie/<%= rosaryGroup.id %>"><%= rosaryGroup.name %></dvi></td>
+          <td>
+          </td>
+          <td>
+            <div>
+              <a href="">🖊️</a>
+              <a href="">⬆️</a>
+              <a href="">⬇️</a>
+              <a href="">❌</a>
+            </div>
+          </td>
+        </tr>
+        <%})%>
+        <!-- create new group form -->
+        <tr scope="row">
+          <form class="form-inline" action="/group" method="POST">
+            <td>
+              <label for="nazwa rozy">Nazwa:</label>
+            </td>
+            <td>
+                <input type="text" name="name" class="form-control" placeholder="Enter name" id="nazwa rozy">
+            </td>
+            <td>
+                <input type="checkbox"  class="toggle-act"  value="1" checked = "checked">
+                <input type="hidden" value="1" class="toggle-hid" name="active" > 
+            </td>
+            <td>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </td>
+          </form>
         </tr>
       </tbody>
     </table>
