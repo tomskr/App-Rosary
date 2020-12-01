@@ -62,8 +62,7 @@ app.post('/group', async (req,res) =>{
 //group/:id/delete
 app.get('/group/:id/delete', async (req, res) => {
   const rosaryInstance = await rosaryGroup.findByIdAndDelete(req.params.id)
-  var tempNum = rosaryInstance.order
-   for(tempNum;tempNum<=(await rosaryGroup.find()).length;tempNum++){
+   for(var tempNum = rosaryInstance.order;tempNum<=(await rosaryGroup.find()).length;tempNum++){
     let tempGroup = await rosaryGroup.findOneAndUpdate({order: (tempNum + 1)},{order: tempNum})
   }
 
