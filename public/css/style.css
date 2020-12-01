@@ -12,10 +12,21 @@
   visibility: hidden
 }
 
+.btn-transp{
+  background-color: transparent;
+  margin: 0% auto;
+  align-items:center;
+  height:inherit;
+  width: inherit;
+}
+
 .group-table th:nth-of-type(1),
 .group-table td:nth-of-type(1){
   background-color: blue;
-   width: 1em; 
+   width: 1rem; 
+
+   align-items:center;
+   justify-content:center;
 }
 
 
@@ -23,17 +34,30 @@
 .group-table th:nth-of-type(2),
 .group-table td:nth-of-type(2){
   background-color: chartreuse;
-  width: 40em;
+  width: 50rem;
+
+  display:flex;
+  /* flex-grow:1; */
+  /* centering the button */
+  align-items:center;
+  justify-content:center;
+  
 } 
 
 .group-table th:nth-of-type(3),
 .group-table td:nth-of-type(3){
   background-color: yellow;
-  width: 4em;
+  width: 4rem;
+
+  align-items:center;
+  justify-content:center;
 }
 
 .group-table th:nth-of-type(4),
 .group-table td:nth-of-type(4){
   background-color: orange;
-  width: 4em;
+  width: 10rem;
+
+  align-items:center;
+  justify-content:center;
 }

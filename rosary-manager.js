@@ -23,6 +23,7 @@ app.use(express.static("public"))
 //mongoose
 mongoose.connect("mongodb://localhost:27017/rosaryDB",{ 
   useUnifiedTopology: true,
+  useFindAndModify: false,
   useNewUrlParser: true, 
 }).then(() =>{
   console.log('Mongo connection open')
@@ -45,7 +46,7 @@ app.get(['/group','/'], async (req, res) => {
 //group/:id/edit
 //group/:id/up
 //group/:id/down
-//group/:id/delete
+
 app.post('/group', async (req,res) =>{
   const groupList = await rosaryGroup.find({})
   const newGroup = new rosaryGroup({
@@ -58,10 +59,15 @@ app.post('/group', async (req,res) =>{
   res.redirect('/')
 })
 
-app.post('/:id/delete', async (req, res) => {
-  console.log(req.params.id)
-  const groupList = await rosaryGroup.findByIdAndDelete(req.params.id)
-  res.redirect('/')
+//group/:id/delete
+app.get('/group/:id/delete', async (req, res) => {
+  const rosaryInstance = await rosaryGroup.findByIdAndDelete(req.params.id)
+  var tempNum = rosaryInstance.order
+   for(tempNum;tempNum<=(await rosaryGroup.find()).length;tempNum++){
+    let tempGroup = await rosaryGroup.findOneAndUpdate({order: (tempNum + 1)},{order: tempNum})
+  }
+
+  res.redirect('/group')
 })
 
 //czlonkowie

@@ -15,7 +15,7 @@
         <%groupList.forEach(function(rosaryGroup){%>
         <tr scope="row">
           <td>.<%= rosaryGroup.order %></td>
-          <td><dvi href="/czlonkowie/<%= rosaryGroup.id %>"><%= rosaryGroup.name %></dvi></td>
+          <td><a href="/czlonkowie/<%= rosaryGroup.id %>" class="btn-transp btn" role="button"><%= rosaryGroup.name %></a></td>
           <td>
           </td>
           <td>
@@ -23,7 +23,7 @@
               <a href="">🖊️</a>
               <a href="">⬆️</a>
               <a href="">⬇️</a>
-              <a href="">❌</a>
+              <a href="/group/<%=rosaryGroup.id %>/delete">❌</a>
             </div>
           </td>
         </tr>
