@@ -1,5 +1,5 @@
-<%- include('../../partial/header'); -%>
-<%- include('../../partial/navbar'); -%>
+<%- include('../partial/header'); -%>
+<%- include('../partial/navbar'); -%>
 <div class="container">
   <div class="row">
     <table class="table table-hover group-table">
@@ -21,8 +21,8 @@
           <td>
             <div>
               <a href="">🖊️</a>
-              <a href="">⬆️</a>
-              <a href="">⬇️</a>
+              <a href="/group/<%=rosaryGroup.id %>/up">⬆️</a>
+              <a href="/group/<%=rosaryGroup.id %>/down">⬇️</a>
               <a href="/group/<%=rosaryGroup.id %>/delete">❌</a>
             </div>
           </td>
@@ -51,4 +51,4 @@
   </div>
 </div>
 
-<%- include('../../partial/footer'); -%>
+<%- include('../partial/footer'); -%>

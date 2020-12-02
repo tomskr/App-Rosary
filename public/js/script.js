@@ -13,9 +13,4 @@ $(function() {
  })
 
 
-// $("#act-checkbox").is(':chected', function(){
-//     $("#act-checkbox").attr('value', 'true');
-// });
 
-// let d = new Date();
-// document.body.h1.innerHTML = "<h1>Today's date is " + d + "</h1>"

@@ -39,14 +39,10 @@ mongoose.connect("mongodb://localhost:27017/rosaryDB",{
 //grup/
 app.get(['/group','/'], async (req, res) => {
     const groupList = await rosaryGroup.find({}).sort({"order":1})
-    res.render('./pages/grupy/grupy.ejs',{groupList})
+    res.render('./pages/grupy.ejs',{groupList})
 })
 
 //group/new
-//group/:id/edit
-//group/:id/up
-//group/:id/down
-
 app.post('/group', async (req,res) =>{
   const groupList = await rosaryGroup.find({})
   const newGroup = new rosaryGroup({
@@ -59,15 +55,44 @@ app.post('/group', async (req,res) =>{
   res.redirect('/')
 })
 
+//group/:id/edit
+
+//group/:id/up
+app.get('/group/:id/up', async (req, res) => {
+  //order =! 1
+  let mainGroupDoc = await rosaryGroup.findById(req.params.id)
+  if( mainGroupDoc.order != 1 ){
+    await rosaryGroup.findOneAndUpdate({order : mainGroupDoc.order -1},{order:mainGroupDoc.order})
+    mainGroupDoc.order=mainGroupDoc.order-1
+    mainGroupDoc.save()
+    console.log('up')
+  }
+  res.redirect('/group')
+})
+
+//group/:id/down
+app.get('/group/:id/down', async (req, res) => {
+  //order =! max
+  let mainGroupDoc = await rosaryGroup.findById(req.params.id)
+  if(  mainGroupDoc.order != (await rosaryGroup.find()).length){
+    //swap order numbers
+    await rosaryGroup.findOneAndUpdate({order : mainGroupDoc.order +1},{order:mainGroupDoc.order})
+    mainGroupDoc.order=mainGroupDoc.order+1
+    mainGroupDoc.save()
+    console.log('down')
+  }
+  res.redirect('/group')
+})
+
 //group/:id/delete
 app.get('/group/:id/delete', async (req, res) => {
   const rosaryInstance = await rosaryGroup.findByIdAndDelete(req.params.id)
    for(var tempNum = rosaryInstance.order;tempNum<=(await rosaryGroup.find()).length;tempNum++){
     let tempGroup = await rosaryGroup.findOneAndUpdate({order: (tempNum + 1)},{order: tempNum})
-  }
-
+   }
   res.redirect('/group')
 })
+
 
 //czlonkowie
 app.get('/czlonkowie/:id',async(req,res) =>{
