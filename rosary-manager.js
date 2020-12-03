@@ -130,10 +130,11 @@ app.post('/czlonkowie/:id',async(req,res) =>{
 })
 //Harmonograms
 
-app.get('/harmonogram',function(req,res){
+app.get('/harmonogram',async(req,res) =>{
   const heders = event.firstSundays()
-
-  res.render('pages/harmonogram',{heders})
+  const eventList = await rosaryEvent.find()
+  var groupList = await rosaryGroup.find()
+  res.render('pages/harmonogram',{heders,eventList,groupList})
 })
 
 app.post('/harmonogram',async(req,res) =>{

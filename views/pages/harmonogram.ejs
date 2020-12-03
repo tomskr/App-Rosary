@@ -10,7 +10,19 @@
           <td>Nr Róży. wezwanie zelator</td>
           <% heders.forEach(function(heder){ %>
             <td><%=heder%></td>
-          <% }); %>
+          <% });%>
+          <% for (var i = 0; i < groupList.length; i++) {%>
+            <tr>
+            <td><%= groupList[i].name %></td>
+            <!-- Nested loop below --> 
+            <% for (var j = 0; j < eventList.length; j++) {%>
+                <% if (groupList[i].id==eventList[j].rosaryGroup) { %>
+                  <td></td>
+                <% }%>
+              
+            <% } %>
+                </tr>
+          <% } %>
         </tr>
       </tbody>
     </table>
