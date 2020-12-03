@@ -61,3 +61,17 @@
   align-items:center;
   justify-content:center;
 }
+
+/* hide and disable in edit mode */
+
+.edit-new-form{
+  visibility: visible;
+}
+
+
+.edit-disable-btn{
+  cursor: default;
+  pointer-events: none;        
+  text-decoration: none;
+  background-color: grey;
+}
