@@ -16,10 +16,22 @@
         <%groupList.forEach(function(rosaryGroup){%>
         <%if(editmode[0] === "single-edit-mode"&&editmode[1] === rosaryGroup.id){%>
           <!-- single edit mode view -->
-          <tr>
-            <td>
-          <h3>Editing</h3>
-          </td>
+          <tr scope="row" >
+            <form class="form-inline" action="/group/<%=rosaryGroup.id%>/edit" method="POST">
+              <td>
+                <label for="nazwa rozy">.<%=rosaryGroup.order%></label>
+              </td>
+              <td>
+                  <input type="text" name="name" class="form-control" value="<%=rosaryGroup.name%>">
+              </td>
+              <td>
+                  <input type="checkbox"  class="toggle-act"  value="1" <%if(rosaryGroup.active){%>checked<%}%>>
+                  <input type="hidden" value="<%=rosaryGroup.active%>" class="toggle-hid" name="active" > 
+              </td>
+              <td>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </td>
+            </form>
           </tr>
         <%}else{%>      
           <!-- normal view -->
@@ -27,6 +39,7 @@
           <td>.<%= rosaryGroup.order %></td>
           <td><a href="/czlonkowie/<%= rosaryGroup.id %>" class="btn-transp btn" role="button"><%= rosaryGroup.name %></a></td>
           <td>
+            <%=rosaryGroup.active%>
           </td>
           <td>
             <div>

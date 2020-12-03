@@ -69,6 +69,11 @@ app.get('/group/:id/edit', async (req,res) =>{
 })
 
 //group/:id/edit (post)
+app.post('/group/:id/edit', async (req,res) =>{
+  console.log(req.body)
+  const rosaryGroupInst = await rosaryGroup.findByIdAndUpdate({_id:req.params.id},(req.body))
+  res.redirect('/group')
+})
 
 //group/:id/up
 app.get('/group/:id/up', async (req, res) => {
