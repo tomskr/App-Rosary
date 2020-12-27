@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require("mongoose")
 const firstSundays =require('./event.js')
+const moment = require('moment');
 
 const rosaryGroup = require('./models/rosaryGroup')
 const rosaryMember = require('./models/rosaryMember')
@@ -130,16 +131,48 @@ app.post('/czlonkowie/:id',async(req,res) =>{
 })
 //Harmonograms
 
-app.get('/harmonogram',async(req,res) =>{
+app.get('/harmonogram',async function(req,res){
   const heders = event.firstSundays()
-  const eventList = await rosaryEvent.find()
-  var groupList = await rosaryGroup.find()
-  res.render('pages/harmonogram',{heders,eventList,groupList})
+  const groupList = await rosaryGroup.find().populate('rosaryEvents')
+  let rosaryHarmonogram = []
+  for(let x = 0;x<groupList.length;x++){
+    rosaryHarmonogram.push("<tr>")
+    rosaryHarmonogram.push("<td class = \"tablegroup \">"+(x+1)+". " + groupList[x].name + "</td>")
+    if(groupList[x].active){
+    for(let j = 0;j<12;j++){
+    rosaryHarmonogram.push("<td></td>")
+    }}else{
+      for(let j = 0;j<12;j++){
+        rosaryHarmonogram.push("<td><hr size=\"2\" width=\"90%\" color=\"black\">  </td>")
+    }}
+
+      for(let y = 0; y < groupList[x].rosaryEvents.length;y++){
+      if(groupList[x].rosaryEvents.length){
+      let position = ((moment(groupList[x].rosaryEvents[y].startDate + "T04:30").dayOfYear() *43)/366) - 44
+
+      console.log(position)
+      rosaryHarmonogram.push(
+      "<td class = \"paneldate\" style = \" margin-left :" 
+      +  position 
+      +"%;\">" 
+      + groupList[x].rosaryEvents[y].startDate.substring(8,10)
+      + "-"
+      + groupList[x].rosaryEvents[y].stopDate.substring(8,10) 
+      + "</td>")
+      }
+    }
+    rosaryHarmonogram.push("</tr>")
+  }
+  rosaryHarmonogram.push('end')
+  // console.log(rosaryHarmonogram)
+  res.render('pages/harmonogram',{heders,rosaryHarmonogram})
+  //res.json(groupList)
+
 })
 
 app.post('/harmonogram',async(req,res) =>{
   event.populateEvents()
-  res.redirect('harmonogram')
+  res.redirect('/harmonogram')
 })
 
 app.listen(3000, function(){

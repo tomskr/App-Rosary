@@ -3,10 +3,7 @@ const {Schema} = mongoose
 
 const rosaryEventSchema = new Schema({
   startDate: String,
-  stopDate: String,
-  rosaryGroup: {
-    type: Schema.Types.ObjectId,
-    ref:'rosaryGroup'}
+  stopDate: String
 })
 
 

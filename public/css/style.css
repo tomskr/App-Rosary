@@ -1,4 +1,17 @@
 
+.tablegroup {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+table, th, td {
+  border: 2px solid black;
+  font-family: 'Bangers', cursive;
+  font-size: 25px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
 .center{
   margin: auto;
 }
@@ -74,4 +87,31 @@
   pointer-events: none;        
   text-decoration: none;
   background-color: grey;
+}
+
+.paneldate{
+  position: absolute;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 5px;
+  background-color: rgb(204, 232, 233);
+  border: none;
+  border-radius: 15px 50px 30px;
+  font-size: 23px;
+}
+
+
+
+.red{
+  color:darkred;
+}
+
+img{
+  width: 80px;
+}
+
+h1{
+  font-family: 'Courgette', cursive;
+  font-size: 50px;
+  text-align: center;
 }

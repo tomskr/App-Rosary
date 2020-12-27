@@ -18,22 +18,33 @@ const firstSundays = () => {
 
 const populateEvents = async () => {
     //delete all in rosaryEvent
-    const result = await rosaryEvent.deleteMany()
+    if(rosaryGroup.length){
+    rosaryGroup.updateMany({}, { $set: { rosaryEvents: [] }}, function(err, affected){
+        console.log('affected: ', affected);
+    })}
+
+    if(rosaryEvent.length){
+    rosaryEvent.deleteMany({}, function(err, result) {
+        console.log('affected: ', result);
+    })}
+
     //make active group list
     const groupList = await rosaryGroup.find({ active: true }).sort({ order: 1 })
     var count = 0
     for(let date = moment("2021-01-01 09:15:00"); date.year() != 2022; date.add(1,'d')) {
         if (date.day() === 1) {
-            var startDate = date.format('YYYY-MM-DD')
-            var stopDate = date.add(6, 'd').format('YYYY-MM-DD')
-            // console.log(startDate + " " + stopDate)
-            var rosaryDuty = new rosaryEvent({
+            let startDate = date.format('YYYY-MM-DD')
+            let stopDate = date.add(6, 'd').format('YYYY-MM-DD')
+            let newRosaryEvent = new rosaryEvent({
                 startDate: startDate,
                 stopDate: stopDate,
-                rosaryGroup: groupList[count%groupList.length]
             })
-            ++count
-            rosaryDuty.save()  
+            newRosaryEvent.save()
+            .catch(err => res.status(400).json(`Error: ${err}`));
+            groupList[count%groupList.length].rosaryEvents.push(newRosaryEvent)
+            await groupList[count%groupList.length].save()
+            .catch(err => res.status(400).json(`Error: ${err}`));
+            ++count 
         }
     }
 }
